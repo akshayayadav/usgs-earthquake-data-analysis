@@ -39,7 +39,8 @@ get_lat_log_depth<-function(coord_list){
 }
 
 get_table_from_json <- function(starttime=2014-01-01,endtime=2014-01-02){
-  link="https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2014-01-01&endtime=2014-01-02"
+  baselink="https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&"
+  link=paste0(baselink,"starttime=",starttime,"&endtime=",endtime)
   geojson<-fromJSON(link)
   
   geojson.table<-as.data.frame(geojson$features)
