@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\nlibrary(jsonlite)\nlibrary(tidyverse)\nlibrary(purrr)\nlibrary(sp)\nlibrary(rworldmap)\nlibrary(ggmap)\nlibrary(ggvis)\nsource(\"../usgs-earthquake-data-analysis/read_json_data.R\")\n\nshinyServer(function(input, output) {\n\n  observeEvent(input$GetData, {\n    dates<-format(input$startdate)\n    quake.data.table<-get_table_from_json(starttime=dates[1],endtime=dates[2])\n    quake.data.table<-attach_regions(quake.data.table)\n    \n    filtered.quake.data.table <- reactive({\n      sigRange<-input$significance\n      quake.data.table %>% filter(sig>=sigRange)\n    })\n    \n    output$plot <- renderPlot({\n      ggplot(data = filtered.quake.data.table(), aes_string(x = input$histBy, fill = input$histBy)) +\n        geom_bar(stat = \"count\") +\n        theme_bw() +\n        theme(axis.text.x=element_text(angle=30, hjust=1,size = 10),axis.title.x=element_blank())\n      }) \n    \n    observeEvent(input$mapPlot,{\n      filtered.data.table.map<-filtered.quake.data.table()\n      locationbox<-c(min(filtered.data.table.map$longitude),\n                     min(filtered.data.table.map$latitude),\n                     max(filtered.data.table.map$longitude),\n                     max(filtered.data.table.map$latitude))\n      selectedmap <-get_map(location = input$contiSelect,\n                zoom = 3, maptype = \"hybrid\", scale = 2)\n      \n      output$mapPlotOutput<-renderPlot({\n        ggmap(selectedmap,extent=\"device\") +\n          geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude, fill = \"red\", alpha = 0.8), size = 5, shape = 21) +\n          guides(fill=FALSE, alpha=FALSE, size=FALSE) + coord_fixed(ratio=2/2)\n      })\n      \n    })\n    \n    })\n    \n  \n\n  \n  \n\n})\n",
+    "created" : 1492273486213.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "275783970",
+    "id" : "8D29E324",
+    "lastKnownWriteTime" : 1492395622,
+    "last_content_update" : 1492395622546,
+    "path" : "~/courses/stat585X/project/earthquakeApp/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

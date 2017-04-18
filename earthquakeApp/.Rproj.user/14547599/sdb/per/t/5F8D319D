@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(shiny)\n\nshinyUI(fluidPage(\n\n  # Application title\n  titlePanel(\"USGS Earthquake Data Analysis\"),\n\n  # Sidebar with a slider input for number of bins\n  sidebarLayout(\n    sidebarPanel(\n      dateRangeInput(\"startdate\", \"Select start date\", min = NULL, max = NULL,\n                format = \"yyyy-mm-dd\", startview = \"month\", weekstart = 0,\n                language = \"en\", width = NULL),\n      actionButton(\"GetData\", label = \"Get Earthquake Data\"),\n      \n      radioButtons(\"histBy\", label = h3(\"Distribution by\"),\n                   choices = list(\"By Country\" = \"countries\", \"By Continent\" = \"continents\"), \n                   selected = \"countries\"),\n      \n      sliderInput(\"significance\", label = h3(\"Filter by Significance\"), min = 0, \n                  max = 1000, value = 0),\n      \n      selectInput(\"contiSelect\", label = h3(\"Select Continent to display\"), \n                  choices = list(\"Africa\" = \"africa\", \n                                 \"Antartica\"=\"antartica\",\n                                 \"Asia\" = \"asia\", \n                                 \"Australia/Oceania\" = \"australia\",\n                                 \"Europe\"=\"europe\",\n                                 \"North America\" = \"north america\",\n                                 \"South America\" = \"south america\"\n                                 ), \n                  selected = \"Africa\"),\n      \n      actionButton(\"mapPlot\", label = \"Show on Map\")\n      \n      \n    ),\n    # Show a plot of the generated distribution\n    mainPanel(\n      plotOutput(\"plot\"),\n      plotOutput(\"mapPlotOutput\")\n    )\n  )\n  \n))\n",
+    "created" : 1492273487526.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3553700295",
+    "id" : "5F8D319D",
+    "lastKnownWriteTime" : 1492395362,
+    "last_content_update" : 1492395362073,
+    "path" : "~/courses/stat585X/project/earthquakeApp/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

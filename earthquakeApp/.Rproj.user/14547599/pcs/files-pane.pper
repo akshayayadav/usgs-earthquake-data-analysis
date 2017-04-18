@@ -1,0 +1,9 @@
+{
+    "path" : "~/courses/stat585X/project/earthquakeApp",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
