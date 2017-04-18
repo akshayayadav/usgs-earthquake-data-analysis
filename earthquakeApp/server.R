@@ -12,8 +12,7 @@ library(purrr)
 library(sp)
 library(rworldmap)
 library(ggmap)
-library(ggvis)
-source("../usgs-earthquake-data-analysis/read_json_data.R")
+source("../read_json_data.R")
 
 shinyServer(function(input, output) {
 
@@ -40,13 +39,22 @@ shinyServer(function(input, output) {
                      min(filtered.data.table.map$latitude),
                      max(filtered.data.table.map$longitude),
                      max(filtered.data.table.map$latitude))
-      selectedmap <-get_map(location = input$contiSelect,
-                zoom = 3, maptype = "hybrid", scale = 2)
+      selectedmap <-get_map(location = input$contiSelect,zoom = 3, maptype = "hybrid", scale = 2)
       
       output$mapPlotOutput<-renderPlot({
         ggmap(selectedmap,extent="device") +
-          geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude, fill = "red", alpha = 0.8), size = 5, shape = 21) +
-          guides(fill=FALSE, alpha=FALSE, size=FALSE) + coord_fixed(ratio=2/2)
+          geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude, fill = "red", alpha = 0.8), size = 4, shape = 21) +
+          guides(fill=FALSE, alpha=FALSE, size=FALSE) + coord_cartesian()
+        
+        #mp <- NULL
+        #mapWorld <- borders("world", colour="gray50", fill="gray50") # create a layer of borders
+        #mp <- ggplot() + mapWorld
+        
+        #mp <- mp+ geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude) ,color="blue", size=3)
+        #print(mp)
+        
+        
+        
       })
       
     })
