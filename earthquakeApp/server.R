@@ -11,8 +11,10 @@ library(tidyverse)
 library(purrr)
 library(sp)
 library(rworldmap)
-library(ggmap)
+#library(ggmap)
+library(plotly)
 source("../read_json_data.R")
+source("../util_functions.R")
 
 shinyServer(function(input, output) {
 
@@ -26,44 +28,48 @@ shinyServer(function(input, output) {
       quake.data.table %>% filter(sig>=sigRange)
     })
     
+    output$scatter1<-renderPlotly({
+      ggplty<-filtered.quake.data.table() %>% ggplot(aes(x=sig,y=depth,label=place))+
+        geom_point(data=filtered.quake.data.table(),aes_string(colour=input$histBy))
+      ggplotly(ggplty)
+    })
+    
     output$plot <- renderPlot({
       ggplot(data = filtered.quake.data.table(), aes_string(x = input$histBy, fill = input$histBy)) +
         geom_bar(stat = "count") +
         theme_bw() +
         theme(axis.text.x=element_text(angle=30, hjust=1,size = 10),axis.title.x=element_blank())
-      }) 
+      })
+    output$mapPlotOptions<-renderUI({
+      tagList(
+        selectInput("contiSelect", label = h3("Select Continent to display"), 
+                    choices = get_option_list(filtered.quake.data.table()$continents)),
+        
+        actionButton("mapPlot", label = "Show on Map")
+      )
+    })
     
     observeEvent(input$mapPlot,{
-      filtered.data.table.map<-filtered.quake.data.table()
-      locationbox<-c(min(filtered.data.table.map$longitude),
-                     min(filtered.data.table.map$latitude),
-                     max(filtered.data.table.map$longitude),
-                     max(filtered.data.table.map$latitude))
-      selectedmap <-get_map(location = input$contiSelect,zoom = 3, maptype = "hybrid", scale = 2)
+      filtered.data.table.map<-filtered.quake.data.table() %>% filter(continents==input$contiSelect)
+      #locationbox<-make_bbox(lon=longitude,lat=latitude,data=filtered.data.table.map,f=0.1)
+      #selectedmap <-get_map(location = locationbox,zoom = 3, scale = 2)
       
-      output$mapPlotOutput<-renderPlot({
-        ggmap(selectedmap,extent="device") +
-          geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude, fill = "red", alpha = 0.8), size = 4, shape = 21) +
-          guides(fill=FALSE, alpha=FALSE, size=FALSE) + coord_cartesian()
+      output$mapPlotOutput<-renderPlotly({
+        #ggmap(selectedmap,extent="panel") +
+         # geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude, fill = "red", alpha = 0.8), size = 4, shape = 21) +
+          #guides(fill=FALSE, alpha=FALSE, size=FALSE) + coord_fixed()
         
-        #mp <- NULL
-        #mapWorld <- borders("world", colour="gray50", fill="gray50") # create a layer of borders
-        #mp <- ggplot() + mapWorld
+        mp <- NULL
+        mapWorld <- borders("world", colour="gray50", fill="gray50") # create a layer of borders
+        mp <- ggplot(data=filtered.data.table.map,aes(label=place)) + mapWorld
         
-        #mp <- mp+ geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude) ,color="blue", size=3)
-        #print(mp)
-        
-        
-        
+        mapPlotly<-mp+ geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude) ,color="red", size=2)
+        ggplotly(mapPlotly)
       })
       
     })
     
     })
     
-  
-
-  
-  
 
 })

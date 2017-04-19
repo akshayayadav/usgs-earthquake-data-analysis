@@ -1,4 +1,5 @@
 library(shiny)
+library(plotly)
 
 shinyUI(fluidPage(
 
@@ -20,25 +21,14 @@ shinyUI(fluidPage(
       sliderInput("significance", label = h3("Filter by Significance"), min = 0, 
                   max = 1000, value = 0),
       
-      selectInput("contiSelect", label = h3("Select Continent to display"), 
-                  choices = list("Africa" = "africa", 
-                                 "Antartica"="antartica",
-                                 "Asia" = "asia", 
-                                 "Australia/Oceania" = "australia",
-                                 "Europe"="europe",
-                                 "North America" = "north america",
-                                 "South America" = "south america"
-                                 ), 
-                  selected = "Africa"),
-      
-      actionButton("mapPlot", label = "Show on Map")
-      
-      
+      uiOutput("mapPlotOptions")
     ),
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("plot"),
-      plotOutput("mapPlotOutput")
+      tabsetPanel(
+        tabPanel("Tab1",plotOutput("plot"), plotlyOutput("mapPlotOutput")),
+        tabPanel("Tab2",plotlyOutput("scatter1"))
+      )
     )
   )
   
