@@ -9,17 +9,17 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-      dateRangeInput("startdate", "Select start date", min = NULL, max = NULL,
+      dateRangeInput("startdate", "Select from and to dates", min = NULL, max = NULL,
                 format = "yyyy-mm-dd", startview = "month", weekstart = 0,
                 language = "en", width = NULL),
       actionButton("GetData", label = "Get Earthquake Data"),
       
-      radioButtons("histBy", label = h3("Distribution by"),
+      radioButtons("histBy", label = "Distribution by",
                    choices = list("By Country" = "countries", "By Continent" = "continents"), 
                    selected = "countries"),
       
-      sliderInput("significance", label = h3("Filter by Significance"), min = 0, 
-                  max = 1000, value = 0),
+      uiOutput("sigSlider"),
+      
       
       uiOutput("mapPlotOptions")
     ),

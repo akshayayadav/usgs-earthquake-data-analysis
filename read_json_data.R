@@ -1,5 +1,6 @@
 library(jsonlite)
-library(tidyverse)
+library(tidyr)
+library(dplyr)
 library(purrr)
 library(sp)
 library(rworldmap)
@@ -29,6 +30,9 @@ convert_coords_to_regions = function(points)
 attach_regions<-function(inTable){
   lon_lat_dataframe<-data.frame(lon=inTable$longitude,lat=inTable$latitude)
   regions_dataframe<-convert_coords_to_regions(lon_lat_dataframe)
+  regions_dataframe$countries<-as.character(regions_dataframe$countries)
+  regions_dataframe$continents<-as.character(regions_dataframe$continents)
+  regions_dataframe[is.na(regions_dataframe)]<-"Unclassified"
   outTable<-cbind.data.frame(inTable,regions_dataframe)
   return(outTable)
 }
@@ -51,4 +55,10 @@ get_table_from_json <- function(starttime=2014-01-01,endtime=2014-01-02){
   
   quake.table<-quake.table %>% mutate(coords=map(coordinates,get_lat_log_depth)) %>% unnest(coords)
   return(quake.table)
+}
+
+get_earthquake_data<-function(starttime=2014-01-01,endtime=2014-01-02){
+  quake.data.table<-get_table_from_json(starttime=starttime,endtime=endtime)
+  quake.data.table<-attach_regions(quake.data.table)
+  return(quake.data.table)
 }
