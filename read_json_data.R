@@ -1,12 +1,4 @@
-library(jsonlite)
-library(tidyr)
-library(dplyr)
-library(purrr)
-library(sp)
-library(rworldmap)
-
-convert_coords_to_regions = function(points)
-{  
+convert_coords_to_regions = function(points){  
   countriesSP <- getMap(resolution='low')
   #countriesSP <- getMap(resolution='high') #you could use high res map from rworldxtra if you were concerned about detail
   
@@ -38,11 +30,13 @@ attach_regions<-function(inTable){
 }
 
 get_lat_log_depth<-function(coord_list){
-  return_table<-cbind.data.frame(longitude=coord_list[1],latitude=coord_list[2],depth=coord_list[3])
-  return(data.frame(return_table))
+  #return_table<-list(longitude=coord_list[1],latitude=coord_list[2],depth=coord_list[3])
+  return_table<-data.frame(matrix(coord_list,nrow=1,ncol=3))
+  names(return_table)<-c("longitude","latitude","depth")
+  return(return_table)
 }
 
-get_table_from_json <- function(starttime=2014-01-01,endtime=2014-01-02){
+get_table_from_json <- function(starttime="2014-01-01",endtime="2014-01-02"){
   baselink="https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&"
   link=paste0(baselink,"starttime=",starttime,"&endtime=",endtime)
   geojson<-fromJSON(link)
@@ -53,11 +47,11 @@ get_table_from_json <- function(starttime=2014-01-01,endtime=2014-01-02){
   names(geojson.table$geometry)[names(geojson.table$geometry)=="type"]<-"geometry-type"
   quake.table<-cbind.data.frame(id=geojson.table$id,geojson.table$properties,geojson.table$geometry)
   
-  quake.table<-quake.table %>% mutate(coords=map(coordinates,get_lat_log_depth)) %>% unnest(coords)
+  quake.table<-quake.table %>% mutate(coords=lapply(coordinates,get_lat_log_depth)) %>% unnest(coords)
   return(quake.table)
 }
 
-get_earthquake_data<-function(starttime=2014-01-01,endtime=2014-01-02){
+get_earthquake_data<-function(starttime="2014-01-01",endtime="2014-01-02"){
   quake.data.table<-get_table_from_json(starttime=starttime,endtime=endtime)
   quake.data.table<-attach_regions(quake.data.table)
   return(quake.data.table)

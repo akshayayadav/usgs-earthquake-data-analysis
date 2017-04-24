@@ -40,11 +40,12 @@ shinyServer(function(input, output) {
         ggplotly(ggplty)
       })
       
-      output$plot <- renderPlot({
-        ggplot(data = filtered.quake.data.table(), aes_string(x = input$histBy, fill = input$histBy)) +
+      output$histplot <- renderPlotly({
+        histplty<-ggplot(data = filtered.quake.data.table(), aes_string(x = input$histBy, fill = input$histBy)) +
           geom_bar(stat = "count") +
           theme_bw() +
-          theme(axis.text.x=element_text(angle=30, hjust=1,size = 10),axis.title.x=element_blank())
+          theme(axis.text.x=element_text(angle=0, hjust=1,size = 10),axis.title.x=element_blank())
+        ggplotly(histplty)
       })
       output$mapPlotOptions<-renderUI({
         tagList(
@@ -68,7 +69,6 @@ shinyServer(function(input, output) {
           mp <- NULL
           mapWorld <- borders("world", colour="gray50", fill="gray50") # create a layer of borders
           mp <- ggplot(data=filtered.data.table.map,aes(label=place)) + mapWorld
-          
           mapPlotly<-mp+ geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude) ,color="red", size=2)
           ggplotly(mapPlotly)
         })
