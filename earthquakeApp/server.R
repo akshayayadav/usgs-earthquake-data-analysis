@@ -12,6 +12,7 @@ library(tidyr)
 library(purrr)
 library(sp)
 library(rworldmap)
+library(ggplot2)
 #library(ggmap)
 library(plotly)
 source("../read_json_data.R")
@@ -69,6 +70,8 @@ shinyServer(function(input, output) {
           mp <- NULL
           mapWorld <- borders("world", colour="gray50", fill="gray50") # create a layer of borders
           mp <- ggplot(data=filtered.data.table.map,aes(label=place)) + mapWorld
+          #map.world <- map_data(map = "world")
+          #mp<-ggplot(data=map.world, aes(x = long, y = lat, group = group)) + geom_polygon()
           mapPlotly<-mp+ geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude) ,color="red", size=2)
           ggplotly(mapPlotly)
         })
