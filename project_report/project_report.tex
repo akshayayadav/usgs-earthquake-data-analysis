@@ -1,0 +1,13 @@
+\documentclass{article}
+\title{USGS Earthquake Data Analysis}
+\date{\today}
+\author{Akshay Yadav}
+\begin{document}
+	\maketitle
+	\section{Motivation}
+		The United States Geological Survey (USGS) agency maintains detailed records of the earthquakes in the U.S. and around the world. These records are updated on a daily basis and can be used to track earthquakes around the world in real time. The data can be easily accessed using web-APIs provided by the database in a easily parsable JSON (geoJSON) format. This project defines methods to access this data by processing the JSON obtained from the database and return a cleaned dataframe. As an addition, methods to assign the country name and the continent name to each earthquake record are also defined by using the longitude and latitude coordinates of the record. This methods are used in development of a R shiny application that downloads the earthquake data from the USGS database between specified dates, prepares a cleaned dataframe of the data from the JSON, and displays the data in form of a histogram. The histogram can be modified to show either country-wise or continent-wise distribution of earthquakes. The exact continent-wise location of earthquakes can also be viewed on an interactive world map that can be used to zoom in on any particular region on the map. The downloaded earthquake records can be filtered to on significance values using a slider work analyse highly significant records. A scatter-plot of depth v/s the significance values, in a different tab, on the selected earthquakes help in visualizing the relationship between the 2 variables.
+		
+	\section{Application}
+		\subsection{Initialization}
+	
+\end{document}
