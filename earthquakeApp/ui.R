@@ -27,7 +27,7 @@ shinyUI(fluidPage(
     mainPanel(
       tabsetPanel(
         tabPanel("Tab1",plotlyOutput("histplot"), plotlyOutput("mapPlotOutput")),
-        tabPanel("Tab2",plotlyOutput("scatter1"))
+        tabPanel("Tab2",plotlyOutput("scatter1"),plotlyOutput("scatter2"))
       )
     )
   )

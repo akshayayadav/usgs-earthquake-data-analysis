@@ -1,0 +1,41 @@
+---
+title: "USGS Earthquake Data Analysis"
+author: "Akshay Yadav"
+date: "April 25, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## United States Geological Suyvey
+- Agency that maintains records of earthquakes experienced in US and around the world
+- Records and updated every day
+- Records between any dates can be accessed using their web-API
+
+## Data Format and Processing
+- Records between any dates is obtained in a JSON format
+- The JSON is converted into dataframe using `jsonlite` package
+- Latitude, Longitude, Depth, Magnitude, Significance
+- Significance is a composite score assigned by the database (based on magnitude, maximum MMI, felt reports, estimated impact)
+
+## Attaching the region names
+- Using the location coordinates to infer region names (continents and countries)
+- `rworldmap` and `sp` packages to map the coordinates to regions
+
+## Visualizations
+- Country and Continent distribution histograms
+- Plotting continent-wise earthquakes on interactive world map
+- Scatter plots to study the relationship of significance v/s depth and significance v/s intensity
+
+## Examples
+- Japan Earthquake (2011) - sigValue = 2160
+- Indian Ocean Earthquake (2004) - sigValue = 2080
+- Nepal Earthquake - sigValue = 2820
+- [The Ring of Fire](https://earthquake.usgs.gov/learn/glossary/?term=Ring%20of%20Fire)
+
+  
+
+
+

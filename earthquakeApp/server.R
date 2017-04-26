@@ -23,10 +23,13 @@ shinyServer(function(input, output) {
   observeEvent(input$GetData, {
     dates<-format(input$startdate)
     quake.data.table<-get_earthquake_data(starttime=dates[1],endtime=dates[2])
+    mp <- NULL
+    mapWorld <- borders("world", colour="gray50", fill="gray50") # create a layer of borders
     
     output$sigSlider<-renderUI({
-    sliderInput("significance", label = "Filter by Significance", min = 0, 
-                max = max(quake.data.table$sig), value = 0)
+      sigDataRange<-c(min(quake.data.table$sig),max(quake.data.table$sig))
+    sliderInput("significance", label = "Filter by Significance", min = sigDataRange[1], 
+                max = sigDataRange[2], value = sigDataRange[1])
     })
     
     observeEvent(input$significance,{
@@ -35,18 +38,26 @@ shinyServer(function(input, output) {
         quake.data.table %>% filter(sig>=sigRange)
       })
       
+      
+      
       output$scatter1<-renderPlotly({
         ggplty<-filtered.quake.data.table() %>% ggplot(aes(x=sig,y=depth,label=place))+
           geom_point(data=filtered.quake.data.table(),aes_string(colour=input$histBy))
         ggplotly(ggplty)
       })
       
+      output$scatter2<-renderPlotly({
+        ggplty<-filtered.quake.data.table() %>% ggplot(aes(x=sig,y=mag,label=place))+
+          geom_point(data=filtered.quake.data.table(),aes_string(colour=input$histBy))
+        ggplotly(ggplty)
+      })
+      
+      
       output$histplot <- renderPlotly({
         histplty<-ggplot(data = filtered.quake.data.table(), aes_string(x = input$histBy, fill = input$histBy)) +
-          geom_bar(stat = "count") +
-          theme_bw() +
-          theme(axis.text.x=element_text(angle=0, hjust=1,size = 10),axis.title.x=element_blank())
-        ggplotly(histplty)
+          geom_bar(stat="count") +
+          theme(axis.text.x=element_blank(),axis.title.x=element_blank())
+        ggplotly(histplty,tooltip="count")
       })
       output$mapPlotOptions<-renderUI({
         tagList(
@@ -59,19 +70,9 @@ shinyServer(function(input, output) {
       
       observeEvent(input$mapPlot,{
         filtered.data.table.map<-filtered.quake.data.table() %>% filter(continents==input$contiSelect)
-        #locationbox<-make_bbox(lon=longitude,lat=latitude,data=filtered.data.table.map,f=0.1)
-        #selectedmap <-get_map(location = locationbox,zoom = 3, scale = 2)
         
         output$mapPlotOutput<-renderPlotly({
-          #ggmap(selectedmap,extent="panel") +
-          # geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude, fill = "red", alpha = 0.8), size = 4, shape = 21) +
-          #guides(fill=FALSE, alpha=FALSE, size=FALSE) + coord_fixed()
-          
-          mp <- NULL
-          mapWorld <- borders("world", colour="gray50", fill="gray50") # create a layer of borders
           mp <- ggplot(data=filtered.data.table.map,aes(label=place)) + mapWorld
-          #map.world <- map_data(map = "world")
-          #mp<-ggplot(data=map.world, aes(x = long, y = lat, group = group)) + geom_polygon()
           mapPlotly<-mp+ geom_point(data = filtered.data.table.map, aes(x = longitude, y = latitude) ,color="red", size=2)
           ggplotly(mapPlotly)
         })
