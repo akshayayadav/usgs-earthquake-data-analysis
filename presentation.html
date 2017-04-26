@@ -102,22 +102,18 @@
 
 <ul>
 <li>Agency that maintains records of earthquakes experienced in US and around the world</li>
-<li>Records and updated every day</li>
+<li>Records updated every day</li>
 <li>Records between any dates can be accessed using their web-API</li>
+<li><a href='https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&amp;starttime=2014-01-01&amp;endtime=2014-01-02' title=''>https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&amp;starttime=2014-01-01&amp;endtime=2014-01-02</a></li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>Data Format and Processing</h2></hgroup><article  id="data-format-and-processing">
 
 <ul>
-<li>Records between any dates is obtained in a JSON format</li>
+<li>Records between any dates is obtained in a <a href='https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson_detail.php' title=''>JSON</a> format</li>
 <li>The JSON is converted into dataframe using <code>jsonlite</code> package</li>
 <li>Latitude, Longitude, Depth, Magnitude, Significance</li>
 <li>Significance is a composite score assigned by the database (based on magnitude, maximum MMI, felt reports, estimated impact)</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>Attaching the region names</h2></hgroup><article  id="attaching-the-region-names">
-
-<ul>
 <li>Using the location coordinates to infer region names (continents and countries)</li>
 <li><code>rworldmap</code> and <code>sp</code> packages to map the coordinates to regions</li>
 </ul>
