@@ -1,7 +1,6 @@
 ---
 title: "USGS Earthquake Data Analysis"
 author: "Akshay Yadav"
-date: "April 25, 2017"
 output: ioslides_presentation
 ---
 
@@ -9,7 +8,8 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## United States Geological Suyvey
+## ![](images/usgs.png)
+- United States Geological Survey
 - Agency that maintains records of earthquakes experienced in US and around the world
 - Records updated every day
 - Records between any dates can be accessed using their web-API
@@ -26,15 +26,16 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Visualizations
 - Country and Continent distribution histograms
 - Plotting continent-wise earthquakes on interactive world map
-- Scatter plots to study the relationship of significance v/s depth and significance v/s intensity
+- Scatter plots to study the relationship of significance v/s depth and significance v/s magnitude
 
 ## Examples
 - Indian Ocean Earthquake (2004) - sigValue = 2080
 - Japan Earthquake (2011) - sigValue = 2160
 - Nepal Earthquake (2015) - sigValue = 2820
-- [The Ring of Fire](https://earthquake.usgs.gov/learn/glossary/?term=Ring%20of%20Fire)
+- Ring of Fire
 
-  
-
+```{r, out.width = "400px"}
+knitr::include_graphics("images/ring_of_fire.gif")
+```
 
 
