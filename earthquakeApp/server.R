@@ -130,7 +130,7 @@ shinyServer(function(input, output) {
         scale_x_discrete(labels = abbreviate)
         theme(axis.text.x=element_blank(),axis.title.x=element_blank())
         
-        ggplotly(histplty,tooltip="count")
+        ggplotly(histplty)
       })
       output$mapPlotOptions<-renderUI({
         tagList(
