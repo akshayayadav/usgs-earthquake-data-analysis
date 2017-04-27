@@ -125,10 +125,11 @@ shinyServer(function(input, output) {
       
       
       output$histplot <- renderPlotly({
-        histplty<-ggplot(data = filtered.quake.data.table(),aes_string(x = input$histBy)) +
-          geom_bar(stat="count",aes_string(fill=input$histBy))+geom_bar(stat="count") +
+        histplty<-ggplot(data = filtered.quake.data.table(),aes_string(x = input$histBy,fill=input$histBy)) +
+        geom_bar(stat="count") + 
         scale_x_discrete(labels = abbreviate)
-          theme(axis.text.x=element_blank(),axis.title.x=element_blank())
+        theme(axis.text.x=element_blank(),axis.title.x=element_blank())
+        
         ggplotly(histplty,tooltip="count")
       })
       output$mapPlotOptions<-renderUI({
