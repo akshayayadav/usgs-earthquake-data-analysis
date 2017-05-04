@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.1.23)  2 MAY 2017 22:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.4.12)  3 MAY 2017 21:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -175,10 +175,10 @@ at main-tains records
 File: ../images/report_image3.png Graphic file (type png)
 
 <use ../images/report_image3.png>
-Package pdftex.def Info: ../images/report_image3.png used on input line 30.
+Package pdftex.def Info: ../images/report_image3.png used on input line 29.
 (pdftex.def)             Requested size: 345.0pt x 198.2903pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 30--31
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 29--30
 [][] 
  []
 
@@ -186,10 +186,10 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 30--31
 File: ../images/report_image4.png Graphic file (type png)
 
 <use ../images/report_image4.png>
-Package pdftex.def Info: ../images/report_image4.png used on input line 35.
+Package pdftex.def Info: ../images/report_image4.png used on input line 34.
 (pdftex.def)             Requested size: 345.0pt x 195.97589pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 35--36
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 34--35
 [][] 
  []
 
@@ -197,10 +197,10 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 35--36
 File: ../images/report_image5.png Graphic file (type png)
 
 <use ../images/report_image5.png>
-Package pdftex.def Info: ../images/report_image5.png used on input line 45.
+Package pdftex.def Info: ../images/report_image5.png used on input line 43.
 (pdftex.def)             Requested size: 345.0pt x 196.38763pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 45--46
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 43--44
 [][] 
  []
 
@@ -208,10 +208,10 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 45--46
 File: ../images/report_image6.png Graphic file (type png)
 
 <use ../images/report_image6.png>
-Package pdftex.def Info: ../images/report_image6.png used on input line 50.
+Package pdftex.def Info: ../images/report_image6.png used on input line 48.
 (pdftex.def)             Requested size: 345.0pt x 201.0168pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 50--51
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 48--49
 [][] 
  []
 
@@ -221,10 +221,10 @@ eport_image5.png>]
 File: ../images/report_image7.png Graphic file (type png)
 
 <use ../images/report_image7.png>
-Package pdftex.def Info: ../images/report_image7.png used on input line 61.
+Package pdftex.def Info: ../images/report_image7.png used on input line 59.
 (pdftex.def)             Requested size: 345.0pt x 199.57132pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 61--62
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 59--60
 [][] 
  []
 
@@ -233,16 +233,16 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 61--62
 Here is how much of TeX's memory you used:
  1520 strings out of 493029
  22201 string characters out of 6136234
- 82536 words of memory out of 5000000
+ 82538 words of memory out of 5000000
  5059 multiletter control sequences out of 15000+600000
  7280 words of font info for 26 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,6n,23p,993b,230s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,6n,23p,997b,230s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on project_report.pdf (6 pages, 485997 bytes).
+Output written on project_report.pdf (6 pages, 485882 bytes).
 PDF statistics:
  46 PDF objects out of 1000 (max. 8388607)
  26 compressed objects within 1 object stream
