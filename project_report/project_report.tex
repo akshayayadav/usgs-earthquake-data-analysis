@@ -32,10 +32,10 @@
 		
 		\begin{figure}
 			\fbox{\includegraphics[width=\textwidth]{report_image4.png}}
-			\caption{The effect of slider can also be seen on the continent-wise distribution. Most of earthquake from North American continent are filtered out}
+			\caption{The effect of slider can also be seen on the continent-wise distribution. Most of the earthquakes from North American continent are filtered out}
 		\end{figure}
 		
-		An additional processing step included in this project was to infer the names of the countries and continents for each earthquake in the data using the latitude and longitude coordinates in the feature dataframe. The "rworldmap" and "sp" packages were used for this purpose. The coordinate ranges for each country and continent were obtained using functions from "rworldmap" package and the actual earthquake coordinates were mapped to these coordinate ranges using functions from the spacial "sp" packages. Two new columns specifying the country and continent names for the earthquakes were added to the earthquake records dataframe obtained earlier to get the final processed dataframe. The earthquakes detected in oceans and disputed territories were marked as "Unclassfied" in the countries or continent columns.
+		An additional processing step, included in this project, was to infer the names of the countries and continents for each earthquake in the data using the latitude and longitude coordinates in the feature dataframe. The "rworldmap" and "sp" packages were used for this purpose. The coordinate ranges for each country and continent were obtained using functions from "rworldmap" package and the actual earthquake coordinates were mapped to these coordinate ranges using functions from the spacial "sp" packages. Two new columns specifying the country and continent names for the earthquakes were added to the earthquake records dataframe obtained earlier to get the final processed dataframe. The earthquakes detected in oceans and disputed territories were marked as "Unclassfied" in the countries or continent columns.
 		
 	\section{Data Visualization}
 		
